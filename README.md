@@ -22,7 +22,7 @@ To start the container use the command:
 docker-compose -f docker-compose.yml up
 ```
 
-*Sometimes the project may not initiate correctly on the first go. Use Ctrl+C to bring the container down and run the up command again. 
+**Sometimes the project may not initiate correctly on the first go. Use Ctrl+C to bring the container down and run the up command again.**
 
 When the container is running you can access the app at:
 
@@ -30,7 +30,7 @@ When the container is running you can access the app at:
 localhost:3000
 ```
 
-To stop the container use Ctrl+C
+To stop the container use **Ctrl+C**
 
 To remove the container use: 
 
@@ -42,3 +42,4 @@ docker-compose -f docker-compose.yml down
 ## TODO
 Should complete the app so that it actually does somehting
 Should make proper use of labels instead of h2 headers for form elements
+Report travel time in hours, minutes and seconds
