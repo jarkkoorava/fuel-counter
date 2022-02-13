@@ -4,6 +4,8 @@ import Form from 'react-bootstrap/Form';
 import RangeSlider from 'react-bootstrap-range-slider';
 import Button from 'react-bootstrap/Button';
 import Results from './Results';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import './App.css';
 
 const App = () => {
@@ -44,7 +46,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <Container>
+      <Container className="content">
         <h1>
           Fuel consumption counter
         </h1>
@@ -54,9 +56,9 @@ const App = () => {
 
         {showForm &&
           <Form>
-            <h2>
+            <h4 className="mt-4">
               Choose a car
-            </h2>
+            </h4>
             <Form.Group>
               {cars.map(car =>
                 <Form.Check
@@ -70,64 +72,79 @@ const App = () => {
               )}
             </Form.Group>
 
-            <h2>
+            <h4 className="mt-4">
               Set the distance
-            </h2>
+            </h4>
             <Form.Control 
               type="text"
               value={distance}
               onChange={e => setDistance(e.target.value)}
             />
             
-            <h2>
+            <h4 className="mt-4">
               Set the first speed
-            </h2>
-            <RangeSlider 
-              value={speed1}
-              min={1}
-              max={300}
-              onChange={e => setSpeed1(e.target.value)}
-            />
+            </h4>
+            <Row>
+              <Col xs="10" lg="10">
+                <RangeSlider 
+                  value={speed1}
+                  min={1}
+                  max={300}
+                  onChange={e => setSpeed1(e.target.value)}
+                />
+              </Col>
+              <Col>
+              <h3>
+                {speed1}
+              </h3>
+              </Col>
+            </Row>
 
-            <h2>
+            <h4 className="mt-4">
               Set the second speed
-            </h2>
-            <RangeSlider 
-              value={speed2}
-              min={1}
-              max={300}
-              onChange={e => setSpeed2(e.target.value)}
-            />
-            <div className="d-grip gap-2">
-              <Button
-                variant="primary"
-                onClick={handleClick}
-              >
-                Calculate
-              </Button>
-
-            </div>
+            </h4>
+            <Row>
+              <Col xs="10" lg="10">
+                <RangeSlider 
+                  value={speed2}
+                  min={1}
+                  max={300}
+                  onChange={e => setSpeed2(e.target.value)}
+                />
+              </Col>
+              <Col>
+              <h3>
+                {speed2}
+              </h3>
+              </Col>
+            </Row>
+            <Button className="custom-btn"
+              variant="primary"
+              onClick={handleClick}
+            >
+              Calculate
+            </Button>
 
           </Form>
-          }
+        }
 
-          {showResults &&
-            <> 
-              <Results 
-                carName={checkedCar}
-                consumption={parseInt(carConsumption)}
-                distance={parseInt(distance)}
-                speed1={parseInt(speed1)}
-                speed2={parseInt(speed2)}
-              />
-              <Button
-                variant="primary"
-                onClick={handleClick}
-              >
-                Back
-              </Button>
-            </>
-          }
+        {showResults &&
+          <> 
+            <Results 
+              carName={checkedCar}
+              consumption={carConsumption}
+              distance={parseInt(distance)}
+              speed1={parseInt(speed1)}
+              speed2={parseInt(speed2)}
+            />
+            <Button className="custom-btn"
+              variant="primary"
+              onClick={handleClick}
+            >
+              Back
+            </Button>
+          </>
+        }
 
       </Container>
     </div>

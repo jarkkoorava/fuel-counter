@@ -11,7 +11,6 @@ import './App.css';
  * @param {number} consumption the chosen car's initial consumption per 100km at 1km/h
  * @returns {number} total fuel consumed in liters
  */
-
 const calculateConsumption = (distance, speed, consumption) => {
   const INCREMENT = 1.009 * consumption - consumption;
   let totalConsumption = 0;
@@ -39,6 +38,12 @@ const calculateTravelTime = (distance, speed) => {
   return Math.floor(travelMinutes);
 }
 
+/**
+ * 
+ * @param {number} firstSpeed first speed
+ * @param {number} secondSpeed second speed
+ * @returns null if speeds are the same. Otherwise the faster speed.
+ */
 const determineFasterSpeed = (firstSpeed, secondSpeed) => {
   if (firstSpeed === secondSpeed) {
     return null;
@@ -49,30 +54,42 @@ const determineFasterSpeed = (firstSpeed, secondSpeed) => {
   }
 }
 
+/**
+ * 
+ * @param {number} firstTime first time 
+ * @param {number} secondTime second time
+ * @returns {array} An array with the time difference in minutes and percentage
+ */
 const determineTimeDifference = (firstTime, secondTime) => {
   let timeDifference = 0;
   let percentageDifference = 0;
   if (firstTime > secondTime) {
     timeDifference = firstTime - secondTime;
-    percentageDifference = (firstTime * 100 / secondTime) - 100;
+    percentageDifference = ((firstTime * 100 / secondTime) - 100).toFixed(2);
     return [timeDifference, percentageDifference];
   } else {
     timeDifference = secondTime - firstTime;
-    percentageDifference = (secondTime * 100 / firstTime) - 100;
+    percentageDifference = ((secondTime * 100 / firstTime) - 100).toFixed(2);
     return [timeDifference, percentageDifference];
   }
 }
 
+/**
+ * 
+ * @param {number} firstConsumption first consumption
+ * @param {number} secondConsumption second consumption
+ * @returns An array with the consumption difference in minutes and percentage
+ */
 const determineConsumptionDifference = (firstConsumption, secondConsumption) => {
   let consumptionDifference = 0;
   let percentageDifference = 0;
-  if (firstConsumption > secondConsumption) {
+  if (parseFloat(firstConsumption) > parseFloat(secondConsumption)) {
     consumptionDifference = (firstConsumption - secondConsumption).toFixed(2);
-    percentageDifference = (secondConsumption * 100 / firstConsumption) - 100;
+    percentageDifference = (100 * (firstConsumption - secondConsumption) / firstConsumption).toFixed(2);
     return [consumptionDifference, percentageDifference];
   } else {
     consumptionDifference = (secondConsumption - firstConsumption).toFixed(2);
-    percentageDifference = (firstConsumption * 100 / secondConsumption) - 100;
+    percentageDifference = (100 * (secondConsumption - firstConsumption) / secondConsumption).toFixed(2);
     return [consumptionDifference, percentageDifference];
   }
 }
@@ -93,8 +110,8 @@ const Results = (props) => {
       </p>
       {determineFasterSpeed(props.speed1, props.speed2) ? 
         <p>
-          When travelling at the speed of {determineFasterSpeed(props.speed1, props.speed2)} the trip is {determineTimeDifference(calculateTravelTime(props.distance, props.speed1), calculateTravelTime(props.distance, props.speed2))[0]} minutes faster. <span className="text-success">({determineTimeDifference(calculateTravelTime(props.distance, props.speed1), calculateTravelTime(props.distance, props.speed2))[1].toFixed(2)} % )</span><br/>
-          Fuel consumption is {determineConsumptionDifference(calculateConsumption(props.distance, props.speed1, props.consumption), calculateConsumption(props.distance, props.speed2, props.consumption))[0]} liters greater. <span className="text-danger">({determineTimeDifference(calculateTravelTime(props.distance, props.speed1), calculateTravelTime(props.distance, props.speed2))[1].toFixed(2)} % )</span>
+          When travelling at the speed of {determineFasterSpeed(props.speed1, props.speed2)}km/h the trip is {determineTimeDifference(calculateTravelTime(props.distance, props.speed1), calculateTravelTime(props.distance, props.speed2))[0]} minutes faster. <span className="text-success">({determineTimeDifference(calculateTravelTime(props.distance, props.speed1), calculateTravelTime(props.distance, props.speed2))[1]} % )</span><br/>
+          Fuel consumption is {determineConsumptionDifference(calculateConsumption(props.distance, props.speed1, props.consumption), calculateConsumption(props.distance, props.speed2, props.consumption))[0]} liters greater. <span className="text-danger">{(determineConsumptionDifference(calculateConsumption(props.distance, props.speed1, props.consumption), calculateConsumption(props.distance, props.speed2, props.consumption))[1])} % )</span>
         </p>
       : 
         <p>
