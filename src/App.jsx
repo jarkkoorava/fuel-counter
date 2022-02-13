@@ -15,6 +15,7 @@ const App = () => {
   const [speed1, setSpeed1] = useState(100);
   const [speed2, setSpeed2] = useState(100);
   const [distance, setDistance] = useState(100);
+  const [distanceValidated, setDistanceValidated] = useState(true);
   const [showForm, setShowForm] = useState(true);
   const [showResults, setShowResults] = useState(false);
   
@@ -26,9 +27,7 @@ const App = () => {
 
   const handleButtonChange = (e) => {
     e.persist();
-
     setCheckedCar(e.target.value)
-
     cars.map(car => {
       if (car.name === e.target.value) {
         setCarConsumption(car.consumption);
@@ -36,12 +35,19 @@ const App = () => {
     })
   }
 
+  const handleDistanceChange = (e) => {
+    setDistance(e);
+    if (!isNaN(e) && e > 0) {
+      setDistanceValidated(true);
+    } else {
+      setDistanceValidated(false);
+    }
+  }
+
   const handleClick = () =>{
     setShowResults(!showResults);
     setShowForm(!showForm);
   }
-
-  
 
 
   return (
@@ -73,16 +79,16 @@ const App = () => {
             </Form.Group>
 
             <h4 className="mt-4">
-              Set the distance
+              Set the distance in kilometers
             </h4>
-            <Form.Control 
+            <Form.Control className={!distanceValidated && "is-invalid"}
               type="text"
               value={distance}
-              onChange={e => setDistance(e.target.value)}
+              onChange={e => handleDistanceChange(e.target.value)}
             />
             
             <h4 className="mt-4">
-              Set the first speed
+              Set the first speed in km/h
             </h4>
             <Row>
               <Col xs="10" lg="10">
@@ -101,7 +107,7 @@ const App = () => {
             </Row>
 
             <h4 className="mt-4">
-              Set the second speed
+              Set the second speed in km/h
             </h4>
             <Row>
               <Col xs="10" lg="10">
@@ -121,6 +127,8 @@ const App = () => {
             <Button className="custom-btn"
               variant="primary"
               onClick={handleClick}
+              disabled={distanceValidated ? false : true}
+              
             >
               Calculate
             </Button>

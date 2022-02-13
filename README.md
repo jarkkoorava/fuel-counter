@@ -40,6 +40,6 @@ docker-compose -f docker-compose.yml down
 
 
 ## TODO
-Should complete the app so that it actually does somehting
-Should make proper use of labels instead of h2 headers for form elements
-Report travel time in hours, minutes and seconds
+Make proper use of labels instead of h2 headers for form elements  
+Report travel time in hours, minutes and seconds  
+Write unit tests

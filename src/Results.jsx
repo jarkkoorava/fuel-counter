@@ -110,8 +110,8 @@ const Results = (props) => {
       </p>
       {determineFasterSpeed(props.speed1, props.speed2) ? 
         <p>
-          When travelling at the speed of {determineFasterSpeed(props.speed1, props.speed2)}km/h the trip is {determineTimeDifference(calculateTravelTime(props.distance, props.speed1), calculateTravelTime(props.distance, props.speed2))[0]} minutes faster. <span className="text-success">({determineTimeDifference(calculateTravelTime(props.distance, props.speed1), calculateTravelTime(props.distance, props.speed2))[1]} % )</span><br/>
-          Fuel consumption is {determineConsumptionDifference(calculateConsumption(props.distance, props.speed1, props.consumption), calculateConsumption(props.distance, props.speed2, props.consumption))[0]} liters greater. <span className="text-danger">{(determineConsumptionDifference(calculateConsumption(props.distance, props.speed1, props.consumption), calculateConsumption(props.distance, props.speed2, props.consumption))[1])} % )</span>
+          When travelling at the speed of {determineFasterSpeed(props.speed1, props.speed2)}km/h the trip is {determineTimeDifference(calculateTravelTime(props.distance, props.speed1), calculateTravelTime(props.distance, props.speed2))[0]} minutes faster. <span className="text-success">({determineTimeDifference(calculateTravelTime(props.distance, props.speed1), calculateTravelTime(props.distance, props.speed2))[1]} %)</span><br/>
+          Fuel consumption is {determineConsumptionDifference(calculateConsumption(props.distance, props.speed1, props.consumption), calculateConsumption(props.distance, props.speed2, props.consumption))[0]} liters greater. <span className="text-danger">({(determineConsumptionDifference(calculateConsumption(props.distance, props.speed1, props.consumption), calculateConsumption(props.distance, props.speed2, props.consumption))[1])}%)</span>
         </p>
       : 
         <p>
