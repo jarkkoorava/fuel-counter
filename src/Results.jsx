@@ -39,6 +39,7 @@ const calculateTravelTime = (distance, speed) => {
 }
 
 /**
+ * Determine which of the two speeds is faster. 
  * 
  * @param {number} firstSpeed first speed
  * @param {number} secondSpeed second speed
@@ -55,6 +56,7 @@ const determineFasterSpeed = (firstSpeed, secondSpeed) => {
 }
 
 /**
+ * Determine the time difference of two given time values
  * 
  * @param {number} firstTime first time 
  * @param {number} secondTime second time
@@ -75,6 +77,7 @@ const determineTimeDifference = (firstTime, secondTime) => {
 }
 
 /**
+ * Determine the difference between two fuel consumption values
  * 
  * @param {number} firstConsumption first consumption
  * @param {number} secondConsumption second consumption
@@ -96,7 +99,6 @@ const determineConsumptionDifference = (firstConsumption, secondConsumption) => 
 
 
 const Results = (props) => {
-
   return (
     <div>
       <h2>

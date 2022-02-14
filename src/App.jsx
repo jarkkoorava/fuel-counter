@@ -10,7 +10,7 @@ import './App.css';
 
 const App = () => {
 
-  const [checkedCar, setCheckedCar] = useState('Car 1');
+  const [checkedCar, setCheckedCar] = useState('Car A');
   const [carConsumption, setCarConsumption] = useState(3);
   const [speed1, setSpeed1] = useState(100);
   const [speed2, setSpeed2] = useState(100);
@@ -20,11 +20,14 @@ const App = () => {
   const [showResults, setShowResults] = useState(false);
   
   const cars = [
-    { name: 'Car 1', consumption: 3},
-    { name: 'Car 2', consumption: 3.5},
-    { name: 'Car 3', consumption: 4}
+    { name: 'Car A', consumption: 3},
+    { name: 'Car B', consumption: 3.5},
+    { name: 'Car C', consumption: 4}
   ]
 
+  /**
+   * A function that controls the radio buttons. 
+   */
   const handleButtonChange = (e) => {
     e.persist();
     setCheckedCar(e.target.value)
@@ -35,6 +38,11 @@ const App = () => {
     })
   }
 
+
+  /**
+   *  A function that controls the distance input field and also
+   *  validates the input. 
+   */
   const handleDistanceChange = (e) => {
     setDistance(e);
     if (!isNaN(e) && e > 0) {
@@ -44,6 +52,12 @@ const App = () => {
     }
   }
 
+
+  /**
+   * A function that changes which part of the UI to show. Both
+   * buttons "Calculate" and "Back" can use the same handler 
+   * function.
+   */
   const handleClick = () =>{
     setShowResults(!showResults);
     setShowForm(!showForm);
@@ -58,6 +72,14 @@ const App = () => {
         </h1>
         <p>
           This application compares the fuel consumption and travel time of a vehicle when driving at two different speeds. Please choose one of the vehicles and state the distance to travel and the speeds to compare.
+        </p>
+        <p>
+          The fuel consumption of the vehicles increases linearly with a slope of 1.009. The base consumption of the vehicles at 1km/h is as follows:<br/>
+          <ul>
+            <li>Car A, 3l / 100km</li>
+            <li>Car B, 3.5l / 100km</li>
+            <li>Car C, 4l / 100km</li>
+          </ul>
         </p>
 
         {showForm &&
